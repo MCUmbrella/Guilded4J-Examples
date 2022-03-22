@@ -3,3 +3,4 @@ Here are some example Guilded bots using [Guilded4J](https://github.com/MCUmbrel
 # Catalog
 - **bot1**: Remove messages that contains specified content (such as 'sus'). It asks you to enter auth token at start.
 - **bot2**: Show your system's resource usage (CPU, memory) in a channel. It has a config file.
+- **bot3**: Simple ping-pong bot. The token is hardcoded.
