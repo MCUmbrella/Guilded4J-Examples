@@ -25,7 +25,7 @@ public class Main
             ChatMessage message = event.getChatMessageObject();
             if(message.getContent().equals("/ping"))
             {
-                client.createChannelMessage(message.getChannelId(), "pong", new String[]{message.getMsgId()}, false);
+                client.createChannelMessage(message.getChannelId(), "pong", new String[]{message.getId()}, false);
                 // you can choose not to send 'pong' as a reply by setting the last 2 arguments to null
             }
         }

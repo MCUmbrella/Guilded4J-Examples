@@ -43,7 +43,7 @@ public class GuildedEventListener
         {
             try
             {
-                client.deleteChannelMessage(message.getChannelId(), message.getMsgId());
+                client.deleteChannelMessage(message.getChannelId(), message.getId());
                 System.out.println("Deleted message at " + message.getCreationTime() + " (sender ID: " + message.getCreatorId() + ")");
             }
             catch(Exception e)

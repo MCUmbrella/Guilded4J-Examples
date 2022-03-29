@@ -72,7 +72,7 @@ public class Main
             System.out.println("Creating status message");
             try
             {
-                statusMessageId = UUID.fromString(bot.createChannelMessage(statusChannelId, getStatusMessageText(), null, false).getMsgId());
+                statusMessageId = UUID.fromString(bot.createChannelMessage(statusChannelId, getStatusMessageText(), null, false).getId());
                 //save message ID to 'statusMessage.uuid'
                 System.out.println("Saving message ID");
                 ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("statusMessage.uuid"));
