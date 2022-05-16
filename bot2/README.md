@@ -1,4 +1,4 @@
 # Example bot 2
 Show your system's status in a channel.
 
-![screenshot](https://user-images.githubusercontent.com/40854260/158093955-ce8163d3-4ee4-45b7-b52e-78e128bc8280.png)
+![screenshot](https://user-images.githubusercontent.com/40854260/168553848-d7c55a0f-0594-4aac-87a3-452ee9d05d28.png)
