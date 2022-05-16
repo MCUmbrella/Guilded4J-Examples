@@ -69,8 +69,8 @@ public class ConfigUtil
             // test if channelId is a valid UUID
             UUID.fromString(statusChannelId);
             // be sure that the update interval is not too small
-            if(statusMessageUpdateInterval < 15)
-                throw new IllegalArgumentException("statusMessageUpdateInterval must >=15");
+            if(statusMessageUpdateInterval < 5)
+                throw new IllegalArgumentException("statusMessageUpdateInterval must >=5");
         }
         catch(Exception e)
         {

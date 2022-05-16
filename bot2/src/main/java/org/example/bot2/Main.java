@@ -1,12 +1,13 @@
 package org.example.bot2;
 
-import cn.hutool.core.date.DateUtil; // you can replace this with anything you like
+import cn.hutool.core.date.DateUtil; // you can replace the date util with your own
 import vip.floatationdevice.guilded4j.G4JClient;
+import vip.floatationdevice.guilded4j.object.Embed;
 
 import java.io.*;
 import java.util.UUID;
 
-import static org.example.bot2.StatusUtil.getStatusMessageText;
+import static org.example.bot2.StatusUtil.getStatusEmbed;
 
 /**
  * Show your system's status in a channel.
@@ -30,13 +31,13 @@ public class Main
         }
         catch(ConfigUtil.ConfigCreationException e)
         {
-            System.out.println("Failed to create config file. The program will exit");
+            System.err.println("Failed to create config file. The program will exit");
             e.printStackTrace();
             System.exit(-1);
         }
         catch(ConfigUtil.InvalidConfigException e)
         {
-            System.out.println("Failed to load config file. The program will exit");
+            System.err.println("Failed to load config file. The program will exit");
             e.printStackTrace();
             System.exit(-1);
         }
@@ -72,7 +73,7 @@ public class Main
             System.out.println("Creating status message");
             try
             {
-                statusMessageId = UUID.fromString(bot.createChannelMessage(statusChannelId, getStatusMessageText(), null, false).getId());
+                statusMessageId = UUID.fromString(bot.getChatMessageManager().createChannelMessage(statusChannelId,null, new Embed[]{getStatusEmbed()}, null, null, null).getId());
                 //save message ID to 'statusMessage.uuid'
                 System.out.println("Saving message ID");
                 ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("statusMessage.uuid"));
@@ -97,9 +98,10 @@ public class Main
             {
                 // update status massage
                 long startTime = System.currentTimeMillis();
-                bot.updateChannelMessage(statusChannelId, statusMessageId.toString(), getStatusMessageText());
+                bot.getChatMessageManager().updateChannelMessage(statusChannelId,statusMessageId.toString(), null, new Embed[]{getStatusEmbed()}).getId();
                 if(printUpdateResults)
                     System.out.println("Status message updated at " + DateUtil.date() + ". Took " + (System.currentTimeMillis() - startTime) + "ms");
+                System.gc();
             }
             catch(Exception e)
             {

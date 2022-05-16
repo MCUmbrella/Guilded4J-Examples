@@ -2,8 +2,11 @@ package org.example.bot2;
 
 import cn.hutool.core.date.DateUtil;
 import com.sun.management.OperatingSystemMXBean;
+import vip.floatationdevice.guilded4j.object.Embed;
+import vip.floatationdevice.guilded4j.object.EmbedField;
 
 import java.lang.management.ManagementFactory;
+import java.util.Random;
 
 /**
  * Used to collect and display status information.
@@ -11,44 +14,39 @@ import java.lang.management.ManagementFactory;
  */
 public class StatusUtil
 {
+    private static final Random r = new Random();
+
     /**
-     * Returns formatted status information.
+     * Returns a fancy embed with the system status.
      */
-    public static String getStatusMessageText()
+    public static Embed getStatusEmbed()
     {
-        return "**==========SYSTEM STATUS==========**\n" +
-                DateUtil.date() + "\n" +
-                "**CPU usage:**\n" +
-                "`System: " + getSysCpu() + "`\n" +
-                "`JVM: " + getJVMCpu() + "`\n" +
-                "**Memory:**\n" +
-                "`System: " + getSysMem() + " / " + getSysMemMax() + " MB`\n" +
-                "`JVM: " + getJVMMem() + " / " + getJVMMemMax() + " MB`\n" +
-                "**=================================**";
+        return new Embed()
+                .setTitle(":information_source: SYSTEM STATUS")
+                .setFields(
+                        new EmbedField[]{
+                                new EmbedField().setName("System CPU usage").setValue(getSysCpu()).setInline(true),
+                                new EmbedField().setName("JVM CPU usage").setValue(getJVMCpu()).setInline(true),
+                                new EmbedField().setName("System memory usage").setValue(getSysMem() + " / " + getSysMemMax() + " MB").setInline(true),
+                                new EmbedField().setName("JVM memory usage").setValue(getJVMMem() + " / " + getJVMMemMax() + " MB").setInline(true)
+                        }
+                )
+                .setColor(r.nextInt(0xFFFFFF))
+                .setFooterText(DateUtil.now())
+                .setAuthorName("Guilded4J System Status Bot")
+                .setAuthorUrl("https://github.com/MCUmbrella/Guilded4J");
     }
 
     static OperatingSystemMXBean os = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
     static Runtime rt = Runtime.getRuntime();
 
-    static String getSysMemMax()
-    {
-        return String.valueOf(os.getTotalPhysicalMemorySize() / 1024 / 1024);
-    }
+    static String getSysMemMax(){return String.valueOf(os.getTotalPhysicalMemorySize() / 1024 / 1024);}
 
-    static String getSysMem()
-    {
-        return String.valueOf((os.getTotalPhysicalMemorySize() - os.getFreePhysicalMemorySize()) / 1024 / 1024);
-    }
+    static String getSysMem(){return String.valueOf((os.getTotalPhysicalMemorySize() - os.getFreePhysicalMemorySize()) / 1024 / 1024);}
 
-    static String getJVMMemMax()
-    {
-        return String.valueOf(rt.maxMemory() / 1024 / 1024);
-    }
+    static String getJVMMemMax(){return String.valueOf(rt.maxMemory() / 1024 / 1024);}
 
-    static String getJVMMem()
-    {
-        return String.valueOf((rt.totalMemory() - rt.freeMemory()) / 1024 / 1024);
-    }
+    static String getJVMMem(){return String.valueOf((rt.totalMemory() - rt.freeMemory()) / 1024 / 1024);}
 
     static String getSysCpu()
     {
