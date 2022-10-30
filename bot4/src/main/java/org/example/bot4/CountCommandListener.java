@@ -16,12 +16,12 @@ public class CountCommandListener
     @Subscribe
     public void onChat(ChatMessageCreatedEvent event)
     {
-        if(event.getChatMessageObject().getContent().equals("/count")) // If the message is "/count"
+        if(event.getChatMessage().getContent().equals("/count")) // If the message is "/count"
             try
             {
                 for(int i = 1; i <= 10; i++)
                     cmm.createChannelMessage( // Send a message with the number
-                            event.getChatMessageObject().getChannelId(),
+                            event.getChatMessage().getChannelId(),
                             String.valueOf(i),
                             null,
                             null,

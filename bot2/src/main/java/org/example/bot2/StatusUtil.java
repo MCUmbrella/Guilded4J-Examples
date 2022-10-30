@@ -3,7 +3,7 @@ package org.example.bot2;
 import cn.hutool.core.date.DateUtil;
 import com.sun.management.OperatingSystemMXBean;
 import vip.floatationdevice.guilded4j.object.Embed;
-import vip.floatationdevice.guilded4j.object.EmbedField;
+import vip.floatationdevice.guilded4j.object.misc.EmbedField;
 
 import java.lang.management.ManagementFactory;
 import java.util.Random;

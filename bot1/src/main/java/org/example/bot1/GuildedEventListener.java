@@ -38,7 +38,7 @@ public class GuildedEventListener
     @Subscribe
     public void onMessage(ChatMessageCreatedEvent event)
     {
-        ChatMessage message = event.getChatMessageObject();
+        ChatMessage message = event.getChatMessage();
         if(message.getContent().contains("sus"))
             try
             {

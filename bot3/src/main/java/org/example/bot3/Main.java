@@ -21,7 +21,7 @@ public class Main
     @Subscribe
     public void onMessage(ChatMessageCreatedEvent event)
     {
-        ChatMessage message = event.getChatMessageObject();
+        ChatMessage message = event.getChatMessage();
         if(message.getContent().equals("/ping")) // If someone sends '/ping'
         {
             client.getChatMessageManager().createChannelMessage(

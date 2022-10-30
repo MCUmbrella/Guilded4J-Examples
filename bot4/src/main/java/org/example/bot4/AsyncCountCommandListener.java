@@ -17,7 +17,7 @@ public class AsyncCountCommandListener
     @Subscribe
     public void onChat(ChatMessageCreatedEvent event)
     {
-        if(event.getChatMessageObject().getContent().equals("/count async")) // If the message is "/count async"
+        if(event.getChatMessage().getContent().equals("/count async")) // If the message is "/count async"
         {
             for(int i = 1; i <= 10; i++)
                 new Thread(String.valueOf(i)) // Create a new thread for each number. The thread name is the number.
@@ -28,7 +28,7 @@ public class AsyncCountCommandListener
                         try
                         {
                             cmm.createChannelMessage( // Send a message with the thread name (the number)
-                                    event.getChatMessageObject().getChannelId(),
+                                    event.getChatMessage().getChannelId(),
                                     this.getName(),
                                     null,
                                     null,
