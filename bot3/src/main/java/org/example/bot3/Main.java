@@ -35,20 +35,26 @@ public class Main
             // note: you can choose not to send 'pong' as a reply by setting the last 3 arguments to null
         }
         else if(message.getContent().equals("/exit")) // If someone sends '/exit'
-            System.exit(0); // Exit the program
+        {
+            // Exit the program
+            System.out.println("Closing WebSocket connection");
+            client.disconnectWebSocket(true); // pass true to not let the WebSocket connection close asynchronously
+            System.out.println("Bot is shutting down");
+            System.exit(0);
+        }
     }
 
     /**
      * Starts the bot.
      * The program won't exit until:
-     *   - the connection is closed (you called client.ws.close() or some network error occurred. Such as a timeout)
+     *   - the connection is closed (you called client.disconnectWebSocket() or some network error occurred. Such as a timeout)
      *   - the program is terminated (by Ctrl+C, task manager, etc)
      *   - an exception is thrown (such as can't send 'pong' due to a network error or lack of permissions)
      *   - someone sends '/exit'
      */
     public static void main(String[] args)
     {
-        client.ws.eventBus.register(new Main()); // Register event handler
-        client.ws.connect(); // Connect to the websocket and start listening for events
+        client.registerEventListener(new Main()); // Register event handler
+        client.connectWebSocket(); // Connect to the websocket and start listening for events
     }
 }
