@@ -1,6 +1,7 @@
 package org.example.bot1;
 
 import com.google.common.eventbus.Subscribe;
+import vip.floatationdevice.guilded4j.Util;
 import vip.floatationdevice.guilded4j.event.ChatMessageCreatedEvent;
 import vip.floatationdevice.guilded4j.event.GuildedWebSocketClosedEvent;
 import vip.floatationdevice.guilded4j.event.GuildedWebSocketWelcomeEvent;
@@ -43,7 +44,7 @@ public class GuildedEventListener
             try
             {
                 client.getChatMessageManager().deleteChannelMessage(message.getChannelId(), message.getId());
-                System.out.println("Deleted message at " + message.getCreationTime() + " (sender ID: " + message.getCreatorId() + ")");
+                System.out.println("Deleted message at " + Util.iso8601ToCalendar(message.getCreationTime()).getTime() + " (sender ID: " + message.getCreatorId() + ")");
             }
             catch(Exception e)
             {
